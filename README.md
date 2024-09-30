@@ -1,1 +1,1 @@
-# USOS-ext-Plan-Generator
+# Chrome extension for USOS Plan Generation
