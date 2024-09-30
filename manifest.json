@@ -1,0 +1,18 @@
+{
+    "content_scripts": [
+      {
+        "js": [
+            "read_plan.js",
+            "ui.js",
+            "ui_hover.js",
+            "ui_select.js",
+            "ui_expand.js",
+            "ui_simplify.js",
+            "main.js"],
+        "matches": ["https://*.edu.pl/*"]
+      }
+    ],
+    "manifest_version": 3,
+    "name": "USOS Plan Generator",
+    "version": "1.0.0"
+}
