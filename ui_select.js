@@ -21,6 +21,7 @@ function selectItem(item) {
         _getSameNameType(item.id).forEach(i => {
             if (i.id == item.id) {
                 i.style.background = '';
+                i.style.borderColor = '';
                 _styleBtn(i.shadowRoot.querySelector('button'), true)
             } else {
                 i.style.display = 'block';
@@ -31,6 +32,7 @@ function selectItem(item) {
         _getSameNameType(item.id).forEach(i => {
             if (i.id == item.id) {
                 i.style.background = '#8DE969';
+                i.style.borderColor = '#8DE969';
                 _styleBtn(i.shadowRoot.querySelector('button'), false)
             } else {
                 i.style.display = 'none';
@@ -40,20 +42,16 @@ function selectItem(item) {
 }
 
 function addSelectButtons() {
-    Object.entries(FULL_PLAN).forEach(([name, name_values]) => {
-        Object.entries(name_values).forEach(([type, type_values]) => {
-            type_values.forEach(item => {
-                const obj = document.getElementById(item.id);
-                obj.style.position = 'relative'
-                const button = document.createElement('button');
-                _styleBtn(button, true);
-                button.onclick = (event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    selectItem(item)
-                };
-                obj.shadowRoot.querySelector('div[aria-describedby="dod-info"]').appendChild(button);
-            });
-        });
+    FULL_PLAN.forEach(item => {
+        const obj = document.getElementById(item.id);
+        obj.style.position = 'relative'
+        const button = document.createElement('button');
+        _styleBtn(button, true);
+        button.onclick = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            selectItem(item)
+        };
+        obj.shadowRoot.querySelector('div[aria-describedby="dod-info"]').appendChild(button);
     });
 }

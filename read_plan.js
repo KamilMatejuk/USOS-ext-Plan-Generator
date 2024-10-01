@@ -11,24 +11,6 @@ function _getGroupFromInfoSlot(element) {
     return parseInt(element.querySelector('div[slot="info"]').textContent.match(/gr\.\s*(\d+)/)[1]);
 }
 
-function _groupByKey(items, key) {
-    const new_items = {}
-    const unique_values = Array.from(new Set(items.map(i => i[key]))).sort();
-    unique_values.forEach(v => {
-        new_items[v] = items.filter(i => i[key] == v).map(obj => {
-            const { [key]: _, ...newObj } = obj;
-            return newObj;
-        });
-    })
-    return new_items;
-}
-
-function _groupPlan(plan) {
-    const by_name = _groupByKey(plan, 'name');
-    const by_name_and_type = Object.fromEntries(Object.entries(by_name).map(([k, v]) => [k, _groupByKey(v, 'type')]));
-    return by_name_and_type;
-}
-
 function readPlan() {
     const table = document.getElementsByTagName('usos-timetable')[0];
     const items = [];
@@ -50,5 +32,5 @@ function readPlan() {
             items.push(i);
         });
     });
-    return _groupPlan(items);
+    return items;
 }

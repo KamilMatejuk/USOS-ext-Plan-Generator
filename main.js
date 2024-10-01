@@ -1,4 +1,5 @@
-FULL_PLAN = readPlan() // from read_plan.js
+FULL_PLAN = readPlan(); // from read_plan.js
+console.table(FULL_PLAN);
 
 if (CURRENT_STATE_EXPANDED) { toogleExpand(); } // from ui_expand.js
 if (CURRENT_STATE_SIMPLIFIED) { toogleSimplify(); } // from ui_simplify.js
