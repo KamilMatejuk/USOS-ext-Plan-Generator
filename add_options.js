@@ -1,8 +1,8 @@
 function _generateOptions() {
     const div = document.createElement('div');
     [
-        ['pełny ekran', toogleExpand, !CURRENT_STATE_EXPANDED],
-        ['uproszczony widok ', toogleSimplify, !CURRENT_STATE_SIMPLIFIED],
+        ['pełny ekran', toogleExpand, OPTIONS.expand],            // from option_expand.js
+        ['uproszczony widok ', toogleSimplify, OPTIONS.simplify], // from option_simplify.js
     ].forEach(([text, func, value]) => {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -18,7 +18,7 @@ function _generateOptions() {
     return div;
 }
 
-function renderUI() {
+function renderTopUI() {
     const parent = document.querySelector('div.usos-ui');
     const container = document.createElement('dev');
     container.appendChild(_generateOptions())

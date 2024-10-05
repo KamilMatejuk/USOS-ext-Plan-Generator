@@ -3,11 +3,10 @@
       {
         "js": [
             "read_plan.js",
-            "ui.js",
-            "ui_hover.js",
-            "ui_select.js",
-            "ui_expand.js",
-            "ui_simplify.js",
+            "add_options.js",
+            "option_expand.js",
+            "option_simplify.js",
+            "edit_timetable.js",
             "main.js"],
         "matches": ["https://*.edu.pl/*"]
       }
