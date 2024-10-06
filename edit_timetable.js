@@ -18,23 +18,9 @@ function handleHover(event, hovering) {
 }
 
 function _styleBtn(button, add) {
-    const color = add ? 'green' : 'red'
     button.textContent = add ? '+' : '-';
-    button.style.color = color;
-    button.style.padding = '0';
-    button.style.textAlign = 'center';
-    button.style.cursor = 'pointer';
-    button.style.border = `2px solid ${color}`;
-    button.style.borderRadius = '100%';
-    button.style.background = 'transparent';
-    button.style.fontWeight = 'bold';
-    button.style.position = 'absolute';
-    button.style.left = '5px';
-    button.style.bottom = '5px';
-    button.style.width = '1.5rem';
-    button.style.height = '1.5rem';
-    button.style.fontSize = '1.5rem';
-    button.style.lineHeight = add ? '1.4rem' : '0.9rem';
+    applyStyle(button, 'actionButton');
+    applyStyle(button, add ? 'actionButtonAdd' : 'actionButtonRemove');
 }
 
 function selectItem(event, item) {
@@ -68,7 +54,6 @@ function editTimetableUI() {
         // buttons
         obj.style.position = 'relative'
         const button = document.createElement('button');
-        const svg = document.createElement('svg');
         _styleBtn(button, true);
         button.onclick = (e) => selectItem(e, item)
         obj.shadowRoot.querySelector('div[aria-describedby="dod-info"]').appendChild(button);

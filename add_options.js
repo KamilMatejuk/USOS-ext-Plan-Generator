@@ -21,22 +21,15 @@ function _generateOptions() {
 function renderTopUI() {
     const parent = document.querySelector('div.usos-ui');
     const container = document.createElement('details');
-    container.style.border = '1px solid HSL(52, 90%, 58%)';
-    container.style.background = '#FCF5C7';
-    container.style.borderRadius = '10px';
+    applyStyle(container, 'topUiDetails');
     // summary
     const summary = document.createElement('summary');
     summary.innerText = 'Generator Planu USOS'
-    summary.style.padding = '10px';
-    summary.style.border = '2px solid HSL(52, 90%, 58%)';
-    summary.style.background = '#FCF5C7';
-    summary.style.borderRadius = '10px';
-    summary.style.cursor = 'pointer';
+    applyStyle(summary, 'topUiSummary');
     container.appendChild(summary);
     // contents
     const contents = document.createElement('div');
-    contents.style.padding = '10px';
-
+    applyStyle(contents, 'topUiContents');
     contents.appendChild(_generateOptions());
     container.appendChild(contents);
     parent.children[1].insertAdjacentElement('afterend', container);

@@ -2,6 +2,7 @@
     "content_scripts": [
       {
         "js": [
+            "styles.js",
             "read_plan.js",
             "add_options.js",
             "option_expand.js",
