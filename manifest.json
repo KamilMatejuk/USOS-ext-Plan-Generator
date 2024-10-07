@@ -5,8 +5,6 @@
             "styles.js",
             "read_plan.js",
             "add_options.js",
-            "option_expand.js",
-            "option_simplify.js",
             "edit_timetable.js",
             "main.js"],
         "matches": ["https://*.edu.pl/*"]
