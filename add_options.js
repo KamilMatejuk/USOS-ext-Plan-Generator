@@ -124,6 +124,9 @@ function renderTopUI() {
     container.appendChild(summary);
     // contents
     const contents = applyStyle(document.createElement('div'), 'topUiContents');
+    const header_options = applyStyle(document.createElement('p'), 'topUiHeader');
+    header_options.innerText = 'Ustawienia';
+    contents.appendChild(header_options);
     contents.appendChild(_generateOptions());
     container.appendChild(contents);
     parent.children[1].insertAdjacentElement('afterend', container);

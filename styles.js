@@ -24,6 +24,11 @@ STYLES = {
     topUiContents: {
         padding: '10px',
     },
+    topUiHeader: {
+        margin: '5px',
+        fontWeight: 'bold',
+        fontSize: '1.1rem',
+    },
     topUiOptionsContainer: {
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
