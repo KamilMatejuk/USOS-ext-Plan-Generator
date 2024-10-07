@@ -57,11 +57,15 @@ function toogleSimplifyMinimizeRows(state) {
 // ************************************ ui ************************************
 // ****************************************************************************
 
+function _getCheckboxId(text) {
+    return `checkbox-${text}`.replace(' ', '-').toLowerCase();
+}
+
 function _createCheckbox(text, state) {
     const div = document.createElement('div');
     const checkbox = applyStyle(document.createElement('input'), 'topUiCheckbox');
     checkbox.type = 'checkbox';
-    checkbox.id = `checkbox-${text}`.replace(' ', '-').toLowerCase();
+    checkbox.id = _getCheckboxId(text);
     checkbox.checked = state;
     const label = applyStyle(document.createElement('label'), 'topUiCheckboxLabel');
     label.htmlFor = checkbox.id;
@@ -71,17 +75,18 @@ function _createCheckbox(text, state) {
     return div;
 }
 
+
 function _generateOptions() {
     const div = applyStyle(document.createElement('div'), 'topUiOptionsContainer');
     const schema = {
-        'pełny ekran': [
+        'pełny ekran (5)': [
             ['maksymalizacja szerokości strony', toogleExpandMaximizePageWidth],
             ['maksymalizacja szerokości planu', toogleExpandMaximizePlanWidth],
             ['ukryte lewe menu', toogleExpandHideLeftMenu],
             ['ukryty wybór formatu', toogleExpandHideFormatChoice],
             ['ukryty wybór czasu', toogleExpandHideTimeChoice],
         ],
-        'uproszczony widok': [
+        'uproszczony widok (4)': [
             ['skrócone nazwy przedmiotów', toogleSimplifyShortenName],
             ['ukryta godzina', toogleSimplifyHideTime],
             ['ukryta lokalizacja i typ', toogleSimplifyHideLocation],
@@ -98,7 +103,7 @@ function _generateOptions() {
             detail_checkbox.onchange = (e) => {
                 func(e.target.checked)
                 if (!e.target.checked) {
-                    document.getElementById(`checkbox-${main_label}`.replace(' ', '-').toLowerCase()).checked = false;
+                    document.getElementById(_getCheckboxId(main_label)).checked = false;
                 }
             };
             detail_div.appendChild(detail_checkbox);
@@ -106,7 +111,7 @@ function _generateOptions() {
         main_checkbox.onchange = (e) => {
             schema[main_label].forEach(([detail, func]) => {
                 func(e.target.checked);
-                document.getElementById(`checkbox-${detail}`.replace(' ', '-').toLowerCase()).checked = e.target.checked;
+                document.getElementById(_getCheckboxId(detail)).checked = e.target.checked;
             });
         }
         main_div.append(detail_div);
