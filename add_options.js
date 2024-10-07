@@ -117,16 +117,13 @@ function _generateOptions() {
 
 function renderTopUI() {
     const parent = document.querySelector('div.usos-ui');
-    const container = document.createElement('details');
-    applyStyle(container, 'topUiDetails');
+    const container = applyStyle(document.createElement('details'), 'topUiDetails');
     // summary
-    const summary = document.createElement('summary');
+    const summary = applyStyle(document.createElement('summary'), 'topUiSummary');
     summary.innerText = 'Generator Planu USOS'
-    applyStyle(summary, 'topUiSummary');
     container.appendChild(summary);
     // contents
-    const contents = document.createElement('div');
-    applyStyle(contents, 'topUiContents');
+    const contents = applyStyle(document.createElement('div'), 'topUiContents');
     contents.appendChild(_generateOptions());
     container.appendChild(contents);
     parent.children[1].insertAdjacentElement('afterend', container);
