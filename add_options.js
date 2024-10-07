@@ -115,13 +115,28 @@ function _generateOptions() {
     return div;
 }
 
+function updateSummaryIcon(details) {
+    const summary = details.querySelector('summary');
+    const icon_open = '▼';
+    const icon_closed = '▶';
+    const [icon_old, icon_new] = details.open ? [icon_closed, icon_open] : [icon_open, icon_closed];
+    if (summary.textContent.startsWith(icon_old)) {
+        summary.textContent = icon_new + summary.textContent.slice(1);
+    } else {
+        summary.textContent = icon_old + ' ' + summary.textContent;
+    }
+}
+
 function renderTopUI() {
     const parent = document.querySelector('div.usos-ui');
     const container = applyStyle(document.createElement('details'), 'topUiDetails');
+    container.setAttribute('open', '');
+    container.addEventListener('toggle', () => updateSummaryIcon(container));
     // summary
     const summary = applyStyle(document.createElement('summary'), 'topUiSummary');
     summary.innerText = 'Generator Planu USOS'
     container.appendChild(summary);
+    updateSummaryIcon(container);
     // contents
     const contents = applyStyle(document.createElement('div'), 'topUiContents');
     const header_options = applyStyle(document.createElement('p'), 'topUiHeader');
