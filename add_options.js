@@ -95,9 +95,20 @@ function _generateOptions() {
         const detail_div = applyStyle(document.createElement('div'), 'topUiOptionsDetail');
         schema[main_label].forEach(([detail, func]) => {
             const detail_checkbox = _createCheckbox(detail, false);
-            detail_checkbox.onchange = (e) => func(e.target.checked);
+            detail_checkbox.onchange = (e) => {
+                func(e.target.checked)
+                if (!e.target.checked) {
+                    document.getElementById(`checkbox-${main_label}`.replace(' ', '-').toLowerCase()).checked = false;
+                }
+            };
             detail_div.appendChild(detail_checkbox);
         });
+        main_checkbox.onchange = (e) => {
+            schema[main_label].forEach(([detail, func]) => {
+                func(e.target.checked);
+                document.getElementById(`checkbox-${detail}`.replace(' ', '-').toLowerCase()).checked = e.target.checked;
+            });
+        }
         main_div.append(detail_div);
         div.append(main_div);
     });
