@@ -5,6 +5,7 @@ function applyStyle(element, style) {
     Object.entries(STYLES[style]).forEach(([key, value]) => {
         element.style[key] = value;
     });
+    return element;
 }
 
 STYLES = {
@@ -22,6 +23,24 @@ STYLES = {
     },
     topUiContents: {
         padding: '10px',
+    },
+    topUiOptionsContainer: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+    
+    },
+    topUiOptionsDetail: {
+        marginLeft: '10px',
+        marginTop: '5px',
+        paddingLeft: '10px',
+        borderLeft: '1px solid black',
+    },
+    topUiCheckbox: {
+        cursor: 'pointer',
+    },
+    topUiCheckboxLabel: {
+        cursor: 'pointer',
+        paddingLeft: '5px',
     },
     actionButton: {
         padding: '0',

@@ -1,19 +1,45 @@
-function _generateOptions() {
+function _createCheckbox(text, state) {
     const div = document.createElement('div');
-    [
-        ['pełny ekran', toogleExpand, OPTIONS.expand],            // from option_expand.js
-        ['uproszczony widok ', toogleSimplify, OPTIONS.simplify], // from option_simplify.js
-    ].forEach(([text, func, value]) => {
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = `checkbox-${text}`.replace(' ', '-');
-        checkbox.checked = value;
-        const label = document.createElement('label');
-        label.htmlFor = checkbox.id
-        label.textContent = text;
-        checkbox.onchange = func;
-        div.appendChild(checkbox);
-        div.appendChild(label);
+    const checkbox = applyStyle(document.createElement('input'), 'topUiCheckbox');
+    checkbox.type = 'checkbox';
+    checkbox.id = `checkbox-${text}`.replace(' ', '-').toLowerCase();
+    checkbox.checked = state;
+    const label = applyStyle(document.createElement('label'), 'topUiCheckboxLabel');
+    label.htmlFor = checkbox.id;
+    label.textContent = text;
+    div.appendChild(checkbox);
+    div.appendChild(label);
+    return div;
+}
+
+function _generateOptions() {
+    const div = applyStyle(document.createElement('div'), 'topUiOptionsContainer');
+    const schema = {
+        'pełny ekran': [
+            'maksymalizacja szerokości strony',
+            'ukryte lewe menu',
+            'ukryty wybór formatu',
+            'ukryty wybór czasu',
+        ],
+        'uproszczony widok': [
+            'skrócone nazwy przedmiotów',
+            'ukryta godzina',
+            'ukryta lokalizacja i typ',
+            'zmiejszony rozmiar wierszy',
+        ],
+    }
+    Object.keys(schema).forEach(main_label => {
+        const main_div = document.createElement('div');
+        const main_checkbox = _createCheckbox(main_label, false);
+        // checkbox.onchange = func;
+        main_div.appendChild(main_checkbox);
+        const detail_div = applyStyle(document.createElement('div'), 'topUiOptionsDetail');
+        schema[main_label].forEach(detail => {
+            const detail_checkbox = _createCheckbox(detail, false);
+            detail_div.appendChild(detail_checkbox);
+        });
+        main_div.append(detail_div);
+        div.append(main_div);
     });
     return div;
 }

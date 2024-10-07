@@ -1,5 +1,5 @@
 FULL_PLAN = readPlan(); // from read_plan.js
-console.table(FULL_PLAN);
+// console.table(FULL_PLAN);
 
 OPTIONS = {
     'expand': false,
