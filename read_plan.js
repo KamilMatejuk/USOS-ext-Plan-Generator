@@ -8,7 +8,7 @@ function _getTypeFromInfoSlot(element) {
 }
 
 function _getGroupFromInfoSlot(element) {
-    return parseInt(element.querySelector('div[slot="info"]').textContent.match(/gr\.\s*(\d+)/)[1]);
+    return `gr. ${parseInt(element.querySelector('div[slot="info"]').textContent.match(/gr\.\s*(\d+)/)[1])}`;
 }
 
 function readPlan() {
@@ -20,8 +20,7 @@ function readPlan() {
         Array.from(day_items).forEach(item => {
             let i = {
                 'day': day_name,
-                'time_start': _getHourFromStyle(item, 'grid-row-start'),
-                'time_end': _getHourFromStyle(item, 'grid-row-end'),
+                'time': _getHourFromStyle(item, 'grid-row-start') + ' - ' + _getHourFromStyle(item, 'grid-row-end'),
                 'name': item.getAttribute('name'),
                 'code': item.getAttribute('name-id'),
                 'type': _getTypeFromInfoSlot(item),

@@ -120,6 +120,25 @@ function _generateOptions() {
     return div;
 }
 
+function _generateSelected() {
+    const container = document.getElementById('usos-ext-selected-container');
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    SELECTED.map(id => FULL_PLAN.filter(fp => fp.id == id)[0])
+            .filter(fp => fp)
+            .sort((a, b) => a.name.localeCompare(b.name) || a.type.localeCompare(b.type))
+            .forEach(item => {
+        console.log(item);
+        ['name', 'type', 'group', 'day', 'time'].forEach(attr => {
+            const cell = applyStyle(document.createElement('div'), 'topUiSelectedCell');
+            cell.innerText = item[attr];
+            container.appendChild(cell);
+        });
+    });
+    return [];
+}
+
 function updateSummaryIcon(details) {
     const summary = details.querySelector('summary');
     const icon_open = '▼';
@@ -148,6 +167,13 @@ function renderTopUI() {
     header_options.innerText = 'Ustawienia';
     contents.appendChild(header_options);
     contents.appendChild(_generateOptions());
+    const header_selected = applyStyle(document.createElement('p'), 'topUiHeader');
+    header_selected.innerText = 'Wybrane przedmioty';
+    contents.appendChild(header_selected);
+    const selected = applyStyle(document.createElement('div'), 'topUiSelectedContainer');
+    selected.id = 'usos-ext-selected-container';
+    contents.appendChild(selected);
     container.appendChild(contents);
     parent.children[1].insertAdjacentElement('afterend', container);
+    _generateSelected();
 }

@@ -25,7 +25,7 @@ STYLES = {
         padding: '10px',
     },
     topUiHeader: {
-        margin: '5px',
+        margin: '20px 5px 5px 0',
         fontWeight: 'bold',
         fontSize: '1.1rem',
     },
@@ -46,6 +46,13 @@ STYLES = {
     topUiCheckboxLabel: {
         cursor: 'pointer',
         paddingLeft: '5px',
+    },
+    topUiSelectedContainer: {
+        display: 'grid',
+        gridTemplateColumns: '300px 50px 50px 150px 150px',
+    },
+    topUiSelectedCell: {
+        padding: '3px 0',
     },
     actionButton: {
         padding: '0',

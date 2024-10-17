@@ -1,5 +1,3 @@
-SELECTED = []
-
 function _getSameNameType(id) {
     const [code, type, _] = id.split('_');
     return FULL_PLAN
@@ -29,8 +27,10 @@ function selectItem(event, item) {
     const selected = !SELECTED.includes(item.id)
     if (selected) {
         SELECTED.push(item.id);
+        _generateSelected();
     } else {
         SELECTED = SELECTED.filter(id => id !== item.id);
+        _generateSelected();
     } 
     _getSameNameType(item.id).forEach(i => {
         if (i.id == item.id) {
