@@ -151,6 +151,7 @@ function _generateDownload() {
 }
 
 function _generateSelected() {
+    // classes
     const container = document.getElementById('usos-ext-selected-container');
     while (container.firstChild) {
         container.removeChild(container.firstChild);
@@ -165,8 +166,13 @@ function _generateSelected() {
             container.appendChild(cell);
         });
     });
+    // icon
     const download = document.getElementById('usos-ext-download');
     applyStyle(download, SELECTED.length ? 'topUiDownloadActive' : 'topUiDownloadInactive');
+    // title
+    const all = new Set(FULL_PLAN.map(fp => `${fp.name} ${fp.type}`));
+    const title = document.getElementById('usos-ext-selected-header');
+    title.innerText = `Wybrane przedmioty (${SELECTED.length}/${all.size})`;
 }
 
 function updateSummaryIcon(details) {
@@ -198,7 +204,7 @@ function renderTopUI() {
     contents.appendChild(header_options);
     contents.appendChild(_generateOptions());
     const header_selected = applyStyle(document.createElement('p'), 'topUiHeader');
-    header_selected.innerText = 'Wybrane przedmioty';
+    header_selected.id = 'usos-ext-selected-header';
     contents.appendChild(header_selected);
     contents.appendChild(_generateDownload());
     const selected = applyStyle(document.createElement('div'), 'topUiSelectedContainer');
