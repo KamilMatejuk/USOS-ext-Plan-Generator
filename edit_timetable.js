@@ -22,8 +22,10 @@ function _styleBtn(button, add) {
 }
 
 function selectItem(event, item) {
-    event.preventDefault();
-    event.stopPropagation();
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
     const selected = !SELECTED.includes(item.id)
     if (selected) {
         SELECTED.push(item.id);
@@ -31,7 +33,8 @@ function selectItem(event, item) {
     } else {
         SELECTED = SELECTED.filter(id => id !== item.id);
         _generateSelected();
-    } 
+    }
+    saveToLocalStorage();
     _getSameNameType(item.id).forEach(i => {
         if (i.id == item.id) {
             const color = selected ? '#8DE969' : '';
@@ -57,5 +60,10 @@ function editTimetableUI() {
         _styleBtn(button, true);
         button.onclick = (e) => selectItem(e, item)
         obj.shadowRoot.querySelector('div[aria-describedby="dod-info"]').appendChild(button);
+        // apply sotred selected
+        if (SELECTED.includes(item.id)) {
+            SELECTED = SELECTED.filter(id => id !== item.id);
+            selectItem(null, item);
+        }
     });
 }
