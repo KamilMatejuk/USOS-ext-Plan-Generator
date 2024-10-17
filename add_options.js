@@ -199,18 +199,24 @@ function renderTopUI() {
     updateSummaryIcon(container);
     // contents
     const contents = applyStyle(document.createElement('div'), 'topUiContents');
-    const header_options = applyStyle(document.createElement('p'), 'topUiHeader');
-    header_options.innerText = 'Ustawienia';
-    contents.appendChild(header_options);
-    contents.appendChild(_generateOptions());
-    const header_selected = applyStyle(document.createElement('p'), 'topUiHeader');
-    header_selected.id = 'usos-ext-selected-header';
-    contents.appendChild(header_selected);
-    contents.appendChild(_generateDownload());
-    const selected = applyStyle(document.createElement('div'), 'topUiSelectedContainer');
-    selected.id = 'usos-ext-selected-container';
-    contents.appendChild(selected);
+    if (FULL_PLAN.length) {
+        const header_options = applyStyle(document.createElement('p'), 'topUiHeader');
+        header_options.innerText = 'Ustawienia';
+        contents.appendChild(header_options);
+        contents.appendChild(_generateOptions());
+        const header_selected = applyStyle(document.createElement('p'), 'topUiHeader');
+        header_selected.id = 'usos-ext-selected-header';
+        contents.appendChild(header_selected);
+        contents.appendChild(_generateDownload());
+        const selected = applyStyle(document.createElement('div'), 'topUiSelectedContainer');
+        selected.id = 'usos-ext-selected-container';
+        contents.appendChild(selected);
+    } else {
+        const header_error = document.createElement('p');
+        header_error.innerText = 'Nie udało się załadować planu. Sproboń ponownie później.';
+        contents.appendChild(header_error);
+    }
     container.appendChild(contents);
     parent.children[1].insertAdjacentElement('afterend', container);
-    _generateSelected();
+    if (FULL_PLAN.length) { _generateSelected(); }
 }

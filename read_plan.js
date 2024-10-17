@@ -14,6 +14,7 @@ function _getGroupFromInfoSlot(element) {
 function readPlan() {
     const table = document.getElementsByTagName('usos-timetable')[0];
     const items = [];
+    if (!table) { return items; }
     Array.from(table.children).forEach(column => {
         const day_name = column.children[0].textContent;
         const day_items = column.children[1].getElementsByTagName('timetable-entry');
