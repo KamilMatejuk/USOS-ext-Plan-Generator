@@ -1,6 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const action = urlParams.get('_action');
-if (action == 'home/plany/pokaz') {
+if (window.location.href.includes('usos') && action == 'home/plany/pokaz') {
 
     FULL_PLAN = readPlan(); // from read_plan.js
     // console.table(FULL_PLAN);
