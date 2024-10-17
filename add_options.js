@@ -120,6 +120,36 @@ function _generateOptions() {
     return div;
 }
 
+function _generateDownload() {
+    // https://fontawesome.com/icons/file-arrow-down?f=classic&s=solid
+    const svg = applyStyle(document.createElementNS('http://www.w3.org/2000/svg', 'svg'), 'topUiDownload');
+    svg.setAttribute('viewBox', '0 0 384 512');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM216 232l0 102.1 31-31c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-72 72c-9.4 9.4-24.6 9.4-33.9 0l-72-72c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l31 31L168 232c0-13.3 10.7-24 24-24s24 10.7 24 24z');
+    svg.appendChild(path);
+    svg.id = 'usos-ext-download';
+    // download on click
+    svg.onclick = () => {
+        const headers = ['code', 'name', 'type', 'group', 'day', 'time'];
+        let csvContent = 'data:text/csv;charset=utf-8,';
+        csvContent += headers.join(',') + '\n';
+        SELECTED.map(id => FULL_PLAN.filter(fp => fp.id == id)[0])
+                .filter(fp => fp)
+                .sort((a, b) => a.name.localeCompare(b.name) || a.type.localeCompare(b.type))
+                .forEach(item => {
+                    const row = headers.map(header => item[header]);
+                    csvContent += row.join(',') + '\n';
+                });
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', 'plan.csv');
+        document.body.appendChild(link);
+        link.click();
+    }
+    return svg;
+}
+
 function _generateSelected() {
     const container = document.getElementById('usos-ext-selected-container');
     while (container.firstChild) {
@@ -129,14 +159,14 @@ function _generateSelected() {
             .filter(fp => fp)
             .sort((a, b) => a.name.localeCompare(b.name) || a.type.localeCompare(b.type))
             .forEach(item => {
-        console.log(item);
         ['name', 'type', 'group', 'day', 'time'].forEach(attr => {
             const cell = applyStyle(document.createElement('div'), 'topUiSelectedCell');
             cell.innerText = item[attr];
             container.appendChild(cell);
         });
     });
-    return [];
+    const download = document.getElementById('usos-ext-download');
+    applyStyle(download, SELECTED.length ? 'topUiDownloadActive' : 'topUiDownloadInactive');
 }
 
 function updateSummaryIcon(details) {
@@ -170,6 +200,7 @@ function renderTopUI() {
     const header_selected = applyStyle(document.createElement('p'), 'topUiHeader');
     header_selected.innerText = 'Wybrane przedmioty';
     contents.appendChild(header_selected);
+    contents.appendChild(_generateDownload());
     const selected = applyStyle(document.createElement('div'), 'topUiSelectedContainer');
     selected.id = 'usos-ext-selected-container';
     contents.appendChild(selected);

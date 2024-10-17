@@ -2,7 +2,7 @@
 
 
 function applyStyle(element, style) {
-    Object.entries(STYLES[style]).forEach(([key, value]) => {
+    Object.entries(STYLES[style] || {}).forEach(([key, value]) => {
         element.style[key] = value;
     });
     return element;
@@ -23,6 +23,8 @@ STYLES = {
     },
     topUiContents: {
         padding: '10px',
+        display: 'flex',
+        flexDirection: 'column',
     },
     topUiHeader: {
         margin: '20px 5px 5px 0',
@@ -46,6 +48,20 @@ STYLES = {
     topUiCheckboxLabel: {
         cursor: 'pointer',
         paddingLeft: '5px',
+    },
+    topUiDownload: {
+        height: '2em',
+        cursor: 'pointer',
+        marginTop: '-2rem',
+        alignSelf: 'flex-end',
+    },
+    topUiDownloadActive: {
+        cursor: 'pointer',
+        fill: 'black',
+    },
+    topUiDownloadInactive: {
+        cursor: 'default',
+        fill: '#aaa',
     },
     topUiSelectedContainer: {
         display: 'grid',
