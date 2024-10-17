@@ -65,7 +65,7 @@ STYLES = {
     },
     topUiSelectedContainer: {
         display: 'grid',
-        gridTemplateColumns: '300px 50px 50px 150px 150px',
+        gridTemplateColumns: '400px 50px 50px 150px 150px',
     },
     topUiSelectedCell: {
         padding: '3px 0',
